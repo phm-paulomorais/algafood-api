@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
 
 	// Between configura para pesquisa taxa entre os valores de taxa inicial e taxa final
 	// documentação: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
