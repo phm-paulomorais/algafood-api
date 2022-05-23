@@ -5,15 +5,15 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
+public interface RestauranteRepository extends CustomJpaRepository<Restaurante, Long>, RestauranteRepositoryQueries, 
+												JpaSpecificationExecutor<Restaurante> {
 
 	// Between configura para pesquisa taxa entre os valores de taxa inicial e taxa final
 	// documentação: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
@@ -33,5 +33,5 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long>,
 	List<Restaurante> findTop2ByNomeContaining(String nome);
 	
 	// prefixo countBy
-	int countByCozinhaId(Long cozinha);
+	int countByCozinhaId(Long cozinha); 
 }
