@@ -20,7 +20,8 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 	// esse restaurante não será retornado usando JOIN FETCH r.formasPagamento.
 	// Para resolver isso, temos que usar LEFT JOIN FETCH r.formasPagamento
 	//	@Query("from Restaurante r join fetch r.cozinha join fetch r.formasPagamento")
-	@Query("select distinct r from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+	// "select distinct r from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento"
+	@Query("select distinct r from Restaurante r join fetch r.cozinha")
 	List<Restaurante> findAll();
 	
 	// Between configura para pesquisa taxa entre os valores de taxa inicial e taxa final
