@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import com.algaworks.algafood.core.validation.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -22,6 +25,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Cozinha {
 
+	@NotNull(groups = Groups.CozinhaId.class)
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +33,7 @@ public class Cozinha {
 	
 //	@JsonIgnore // customizando a representação do recurso (resposta do cliente da API) xml e/ou json
 //	@JsonProperty("titulo") // customizando a representação do recurso (resposta do cliente da API) xml e/ou json
+	@NotBlank // por padrão pertence ao grupo Default: (groups = Default.class)
 	@Column(nullable = false)
 	private String nome;
 	
