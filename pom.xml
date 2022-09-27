@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<modelmapper.version>2.3.0</modelmapper.version>
+		<squiggly.version>1.3.18</squiggly.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -77,6 +78,20 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${modelmapper.version}</version>
 		</dependency>   	
+    	
+    	
+    	<!-- Aula 13.3 -->
+    	<!-- Atualmente o Squiggly não está funcionando bem quando trabalhamos com o Spring HATEOAS 1.0. Como dito na aula, estes -->
+    	<!-- problemas podem acontecer em projetos pequenos, mas podemos criar issues e acompanhar o projeto do Squiggly no Github,  -->
+    	<!-- para vermos quando e se terá atualização para corrigir este problema.  -->
+    	<!-- Para responses JSON padrões, sem HATEOAS, o filtro funciona corretamente. -->
+    	<!-- Iremos atualizar aqui, caso haja alguma atualização que corrija o problema.  -->
+    	
+		<dependency>
+		    <groupId>com.github.bohnman</groupId>
+		    <artifactId>squiggly-filter-jackson</artifactId>
+		    <version>${squiggly.version}</version>
+		</dependency>    	
     	
 	</dependencies>
 
