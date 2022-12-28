@@ -310,6 +310,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	        .objects(problemObjects)
 	        .build();
 	    
+	    headers.set("Content-Type", "application/json");
+	    
 	    return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 	
