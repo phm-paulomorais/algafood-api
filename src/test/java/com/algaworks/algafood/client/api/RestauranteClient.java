@@ -13,7 +13,7 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import com.algaworks.algafood.api.model.RestauranteModel;
-import com.algaworks.algafood.api.model.RestauranteResumoModel;
+import com.algaworks.algafood.api.model.RestauranteApenasNomeModel;
 import com.algaworks.algafood.api.model.input.RestauranteInput;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +26,7 @@ public class RestauranteClient {
 	private RestTemplate restTemplate;
 	private String url;
 	
-	public List<RestauranteResumoModel> listar() {
+	public List<RestauranteApenasNomeModel> listar() {
 		try {
 			URI resourceUri = URI.create(url + RESOURCE_PATH);
 			
@@ -39,8 +39,8 @@ public class RestauranteClient {
 
 			HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
 
-			ResponseEntity<RestauranteResumoModel[]> restaurantes = restTemplate.exchange(
-					resourceUri, HttpMethod.GET, requestEntity, RestauranteResumoModel[].class);
+			ResponseEntity<RestauranteApenasNomeModel[]> restaurantes = restTemplate.exchange(
+					resourceUri, HttpMethod.GET, requestEntity, RestauranteApenasNomeModel[].class);
 			
 			
 			return Arrays.asList(restaurantes.getBody());

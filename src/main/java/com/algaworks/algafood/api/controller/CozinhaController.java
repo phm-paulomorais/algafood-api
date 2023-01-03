@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,20 +46,20 @@ public class CozinhaController {
 	private CozinhaModelAssembler cozinhaModelAssembler;
 
 	@Autowired
-	private CozinhaInputDisassembler cozinhaInputDisassembler; 
+	private CozinhaInputDisassembler cozinhaInputDisassembler;
+	
+	@Autowired
+	private PagedResourcesAssembler<Cozinha> pagedResourcesAssembler;
 	
 	// @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@GetMapping
-	public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable) {
+	public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable) {
 		Page<Cozinha> cozinhasPage = cozinhaRepository.findAll(pageable);
 	    
-		List<CozinhaModel> cozinhasModel = cozinhaModelAssembler
-				.toCollectionModel(cozinhasPage.getContent());
+		PagedModel<CozinhaModel> cozinhasPagedModel = pagedResourcesAssembler
+				.toModel(cozinhasPage, cozinhaModelAssembler);
 		
-		Page<CozinhaModel> cozinhasModelPage = new PageImpl<>(cozinhasModel, pageable, 
-				cozinhasPage.getTotalElements());
-		
-		return cozinhasModelPage;
+		return cozinhasPagedModel;
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
