@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import com.algaworks.algafood.api.model.UsuarioModel;
 import com.algaworks.algafood.api.model.input.SenhaInput;
 import com.algaworks.algafood.api.model.input.UsuarioComSenhaInput;
 import com.algaworks.algafood.api.model.input.UsuarioInput;
+import com.algaworks.algafood.core.security.CheckSecurity;
 import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.UsuarioRepository;
 import com.algaworks.algafood.domain.service.CadastroUsuarioService;
@@ -42,6 +44,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioInputDisassembler usuarioInputDisassembler;
     
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     @GetMapping
     public CollectionModel<UsuarioModel> listar() {
         List<Usuario> todasUsuarios = usuarioRepository.findAll();
@@ -49,6 +52,8 @@ public class UsuarioController {
         return usuarioModelAssembler.toCollectionModel(todasUsuarios);
     }
     
+    @PreAuthorize("hasAuthority('SCOPE_READ') and (hasAuthority('CONSULTAR_USUARIOS_GRUPOS_PERMISSOES') or "
+    				+ "@algaSecurity.getUsuarioId() == #usuarioId)")
     @GetMapping("/{usuarioId}")
     public UsuarioModel buscar(@PathVariable Long usuarioId) {
         Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
@@ -56,6 +61,7 @@ public class UsuarioController {
         return usuarioModelAssembler.toModel(usuario);
     }
     
+    // endpoint público
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioModel adicionar(@RequestBody @Valid UsuarioComSenhaInput usuarioInput) {
@@ -65,6 +71,7 @@ public class UsuarioController {
         return usuarioModelAssembler.toModel(usuario);
     }
     
+    @CheckSecurity.UsuariosGruposPermissoes.PodeAlterarUsuario
     @PutMapping("/{usuarioId}")
     public UsuarioModel atualizar(@PathVariable Long usuarioId,
             @RequestBody @Valid UsuarioInput usuarioInput) {
@@ -75,6 +82,7 @@ public class UsuarioController {
         return usuarioModelAssembler.toModel(usuarioAtual);
     }
     
+    @CheckSecurity.UsuariosGruposPermissoes.PodeAlterarPropriaSenha
     @PutMapping("/{usuarioId}/senha")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarSenha(@PathVariable Long usuarioId, @RequestBody @Valid SenhaInput senha) {
