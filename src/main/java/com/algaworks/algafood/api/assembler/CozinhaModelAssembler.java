@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.algaworks.algafood.api.AlgaLinks;
 import com.algaworks.algafood.api.controller.CozinhaController;
 import com.algaworks.algafood.api.model.CozinhaModel;
+import com.algaworks.algafood.core.security.AlgaSecurity;
 import com.algaworks.algafood.domain.model.Cozinha;
 
 @Component
@@ -19,6 +20,9 @@ public class CozinhaModelAssembler  extends RepresentationModelAssemblerSupport<
 	@Autowired
 	private AlgaLinks algaLinks;
 	
+	@Autowired
+	private AlgaSecurity algaSecurity;
+	
 	public CozinhaModelAssembler() {
 		super(CozinhaController.class, CozinhaModel.class);
 	}
@@ -28,7 +32,9 @@ public class CozinhaModelAssembler  extends RepresentationModelAssemblerSupport<
 	    CozinhaModel cozinhaModel = createModelWithId(cozinha.getId(), cozinha);
 	    modelMapper.map(cozinha, cozinhaModel);
 	    
-	    cozinhaModel.add(algaLinks.linkToCozinhas("cozinhas"));
+	    if (algaSecurity.podeConsultarCozinhas()) {
+	    	cozinhaModel.add(algaLinks.linkToCozinhas("cozinhas"));
+	    }
 	    
 	    return cozinhaModel;
 	}

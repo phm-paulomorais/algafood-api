@@ -53,7 +53,7 @@ public class UsuarioController {
     }
     
     @PreAuthorize("hasAuthority('SCOPE_READ') and (hasAuthority('CONSULTAR_USUARIOS_GRUPOS_PERMISSOES') or "
-    				+ "@algaSecurity.getUsuarioId() == #usuarioId)")
+    				+ "@algaSecurity.usuarioAutenticadoIgual(#usuarioId))")
     @GetMapping("/{usuarioId}")
     public UsuarioModel buscar(@PathVariable Long usuarioId) {
         Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
