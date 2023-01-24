@@ -1,0 +1,22 @@
+
+Fluxo: Authorization code
+Gerar o code, digitando a url no navagador. A aplicação client analytics não precisa estar rodando. Depois pegar o code no endereço
+exibido no navegador e usar o code na requisição do postman para gerar o access token.
+
+http://localhost:8080/oauth/authorize?response_type=code&client_id=foodanalytics&state=abc&redirect_uri=http://localhost:8082
+
+
+
+Para executar a aplicação cliente food analytics:
+
+- Ir na pasta raiz e digitar no shell o seguinte comando:
+
+python -m http.server 8082
+
+- Depois acessar no navegador o endereço: http://localhost:8082
+
+
+Para gerar a senha BCrypt que foi usado para cadastrar o client_secret (food123) 
+cifrado na base de dados ($2a$12$C9m5OWERVAXiq9hKQCKdAew611bdK2vVROZX5HjyI0rrV8ynw7aOW) foi usado o serviço:
+
+https://bcrypt-generator.com/
