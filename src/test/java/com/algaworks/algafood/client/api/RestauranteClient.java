@@ -12,9 +12,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
-import com.algaworks.algafood.api.model.RestauranteModel;
-import com.algaworks.algafood.api.model.RestauranteApenasNomeModel;
-import com.algaworks.algafood.api.model.input.RestauranteInput;
+import com.algaworks.algafood.api.v1.model.RestauranteApenasNomeModel;
+import com.algaworks.algafood.api.v1.model.RestauranteModel;
+import com.algaworks.algafood.api.v1.model.input.RestauranteInput;
 
 import lombok.AllArgsConstructor;
 

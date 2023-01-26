@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.algaworks.algafood.api.model.RestauranteModel;
-import com.algaworks.algafood.api.model.input.CidadeIdInput;
-import com.algaworks.algafood.api.model.input.CozinhaIdInput;
-import com.algaworks.algafood.api.model.input.EnderecoInput;
-import com.algaworks.algafood.api.model.input.RestauranteInput;
+import com.algaworks.algafood.api.v1.model.RestauranteModel;
+import com.algaworks.algafood.api.v1.model.input.CidadeIdInput;
+import com.algaworks.algafood.api.v1.model.input.CozinhaIdInput;
+import com.algaworks.algafood.api.v1.model.input.EnderecoInput;
+import com.algaworks.algafood.api.v1.model.input.RestauranteInput;
 
 
 public class InclusaoRestauranteMain {
