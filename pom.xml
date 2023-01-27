@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
+		<version>2.2.2.RELEASE</version> <!--  <version>2.7.1</version> - aula Spring Doc -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent> 
 	<groupId>com.algaworks</groupId>
@@ -14,7 +14,7 @@
 	<name>algafood-api</name>
 	<description>API de delivery  de comida</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>11</java.version> <!-- <java.version>17</java.version> aula Spring Doc -->
 		<modelmapper.version>2.3.0</modelmapper.version>
 		<squiggly.version>1.3.18</squiggly.version>
 		<jasperreports.version>6.20.0</jasperreports.version>
@@ -24,6 +24,7 @@
 		<oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>
 		<spring-security-oauth2.version>2.3.7.RELEASE</spring-security-oauth2.version>
 		<spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
+		<springdoc.version>1.6.9</springdoc.version>
 	</properties> 
 	<dependencies>
 		<dependency>
@@ -193,6 +194,28 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
+		<!-- Dependências Spring Doc -->
+		
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-hateoas</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>		
+    	
+    	<!-- Fim Dependências Spring Doc -->
     	
 	</dependencies>
 
