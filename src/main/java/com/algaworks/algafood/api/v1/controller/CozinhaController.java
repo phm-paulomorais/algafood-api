@@ -13,6 +13,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,7 @@ import com.algaworks.algafood.api.v1.assembler.CozinhaModelAssembler;
 import com.algaworks.algafood.api.v1.model.CozinhaModel;
 import com.algaworks.algafood.api.v1.model.CozinhasXmlWrapper;
 import com.algaworks.algafood.api.v1.model.input.CozinhaInput;
+import com.algaworks.algafood.api.v1.openapi.controller.CozinhaControllerOpenApi;
 import com.algaworks.algafood.core.security.CheckSecurity;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
@@ -40,7 +42,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping(value = "/v1/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE) 
-public class CozinhaController {
+public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
@@ -59,6 +61,7 @@ public class CozinhaController {
 	
 	// @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@CheckSecurity.Cozinhas.PodeConsultar
+	@Override
 	@GetMapping
 	public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable) {
 		log.info("Consultando cozinhas com páginas de {} registros...", pageable.getPageSize());
@@ -79,6 +82,7 @@ public class CozinhaController {
 	// }
 
 	@CheckSecurity.Cozinhas.PodeConsultar
+	@Override
 	@GetMapping("/{cozinhaId}")
 	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
 	    Cozinha cozinha = cadastroCozinha.buscarOuFalhar(cozinhaId);
@@ -88,6 +92,7 @@ public class CozinhaController {
 	
 	// @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
 	@CheckSecurity.Cozinhas.PodeEditar
+	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) { // Utilizar anotação Valid para validar as propriedades do grupo Default.class no momento de cadastrar uma cozinha 
@@ -99,6 +104,7 @@ public class CozinhaController {
 	
 	// @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
 	@CheckSecurity.Cozinhas.PodeEditar
+	@Override
 	@PutMapping("/{cozinhaId}")
 	public CozinhaModel atualizar(@PathVariable Long cozinhaId,
 			@RequestBody @Valid CozinhaInput cozinhaInput) {
@@ -125,10 +131,12 @@ public class CozinhaController {
 	
 	// @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
 	@CheckSecurity.Cozinhas.PodeEditar
+	@Override
 	@DeleteMapping("/{cozinhaId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long cozinhaId) {
-		cadastroCozinha.excluir(cozinhaId);	
+	public ResponseEntity<Void> remover(@PathVariable Long cozinhaId) {
+		cadastroCozinha.excluir(cozinhaId);
+		return ResponseEntity.noContent().build();
 	}
 	
 	

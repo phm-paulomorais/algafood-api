@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.algaworks.algafood.api.v1.assembler.FotoProdutoModelAssembler;
 import com.algaworks.algafood.api.v1.model.FotoProdutoModel;
 import com.algaworks.algafood.api.v1.model.input.FotoProdutoInput;
+import com.algaworks.algafood.api.v1.openapi.controller.RestauranteProdutoFotoControllerOpenApi;
 import com.algaworks.algafood.core.security.CheckSecurity;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.FotoProduto;
@@ -36,7 +37,7 @@ import com.algaworks.algafood.domain.service.FotoStorageService.FotoRecuperada;
 
 @RestController
 @RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos/{produtoId}/foto", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RestauranteProdutoFotoController {
+public class RestauranteProdutoFotoController implements RestauranteProdutoFotoControllerOpenApi {
 
 	@Autowired
 	private CadastroProdutoService cadastroProduto;
@@ -71,6 +72,7 @@ public class RestauranteProdutoFotoController {
 	}
 	
 	@CheckSecurity.Restaurantes.PodeConsultar
+	@Override
 	@GetMapping
 	public FotoProdutoModel buscar(@PathVariable Long restauranteId, 
 	        @PathVariable Long produtoId) {
@@ -81,7 +83,7 @@ public class RestauranteProdutoFotoController {
 	
 	// As fotos dos produtos ficarão públicas (não precisa de autorização para acessá-las)
 	@GetMapping(produces = MediaType.ALL_VALUE)
-	public ResponseEntity<?> servirFoto(@PathVariable Long restauranteId, 
+	public ResponseEntity<?> servir(@PathVariable Long restauranteId, 
 			@PathVariable Long produtoId, @RequestHeader(name = "accept") String acceptHeader) 
 					throws HttpMediaTypeNotAcceptableException {
 		try {
@@ -111,11 +113,13 @@ public class RestauranteProdutoFotoController {
 	}
 	
 	@CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
+	@Override
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT) 
-	public void excluir(@PathVariable Long restauranteId, 
+	public ResponseEntity<Void> excluir(@PathVariable Long restauranteId, 
 	        @PathVariable Long produtoId) {
 	    catalogoFotoProduto.excluir(restauranteId, produtoId);
+	    return ResponseEntity.noContent().build();
 	}   
 	
 	private void verificarCompatibilidadeMediaType(MediaType mediaTypeFoto, 
