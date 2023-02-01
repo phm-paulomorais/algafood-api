@@ -66,7 +66,13 @@ public class SpringDocConfig {
                         new Tag().name("Grupos").description("Gerencia os grupos"),
                         new Tag().name("Cozinhas").description("Gerencia as cozinhas"),
                         new Tag().name("Formas de pagamento").description("Gerencia as formas de pagamento"),
-                        new Tag().name("Pedidos").description("Gerencia os pedidos")
+                        new Tag().name("Pedidos").description("Gerencia os pedidos"),
+                        new Tag().name("Restaurantes").description("Gerencia os restaurantes"),
+                        new Tag().name("Estados").description("Gerencia os estados"),
+                        new Tag().name("Produtos").description("Gerencia os produtos"),
+                        new Tag().name("Usuários").description("Gerencia os usuários"),
+                        new Tag().name("Estatísticas").description("Estatísticas da AlgaFood"),
+                        new Tag().name("Permissões").description("Gerencia as permissões")
                 )).components(new Components()
                 		.schemas(gerarSchemas())
                         .responses(gerarResponses())
