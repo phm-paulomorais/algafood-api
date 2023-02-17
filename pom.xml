@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version> <!--  <version>2.7.1</version> - aula Spring Doc -->
+		<version>2.7.2</version> <!--  <version>2.7.1</version> - aula Spring Doc -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent> 
 	<groupId>com.algaworks</groupId>
@@ -22,11 +22,21 @@
 		<aws-java-sdk-s3.version>1.11.671</aws-java-sdk-s3.version>
 		<logback-ext-loggly.version>0.1.5</logback-ext-loggly.version>
 		<oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>
-		<spring-security-oauth2.version>2.3.7.RELEASE</spring-security-oauth2.version>
-		<spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
 		<springdoc.version>1.6.9</springdoc.version>
+		<springauthserver.version>0.3.1</springauthserver.version>
 	</properties> 
 	<dependencies>
+	
+		<dependency>
+		  <groupId>org.flywaydb</groupId>
+		  <artifactId>flyway-mysql</artifactId>
+		</dependency>
+
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -159,6 +169,12 @@
 		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-oauth2-authorization-server</artifactId>
+			<version>${springauthserver.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -177,19 +193,7 @@
 			<version>${oauth2-oidc-sdk.version}</version>
 		</dependency>	
 		-->														
-    	
-    	<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-jwt</artifactId>
-			<version>${spring-security-jwt.version}</version>
-		</dependency>
-	
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-			<version>${spring-security-oauth2.version}</version>
-		</dependency>
-		
+    			
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
