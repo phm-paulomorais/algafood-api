@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.2</version> <!--  <version>2.7.1</version> - aula Spring Doc -->
+		<version>3.0.0</version> <!--  <version>2.7.1</version> - aula Spring Doc -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent> 
 	<groupId>com.algaworks</groupId>
@@ -14,16 +14,15 @@
 	<name>algafood-api</name>
 	<description>API de delivery  de comida</description>
 	<properties>
-		<java.version>11</java.version> <!-- <java.version>17</java.version> aula Spring Doc -->
-		<modelmapper.version>2.3.0</modelmapper.version>
-		<squiggly.version>1.3.18</squiggly.version>
+		<java.version>17</java.version> 
+		<modelmapper.version>3.0.0</modelmapper.version>
 		<jasperreports.version>6.20.0</jasperreports.version>
 		<lowagie.version>2.1.7</lowagie.version>
 		<aws-java-sdk-s3.version>1.11.671</aws-java-sdk-s3.version>
 		<logback-ext-loggly.version>0.1.5</logback-ext-loggly.version>
-		<oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>
-		<springdoc.version>1.6.9</springdoc.version>
-		<springauthserver.version>0.3.1</springauthserver.version>
+		<!-- <oauth2-oidc-sdk.version>6.21.2</oauth2-oidc-sdk.version>  -->
+		<springdoc.version>2.0.0</springdoc.version>
+		<springauthserver.version>1.0.0</springauthserver.version>
 	</properties> 
 	<dependencies>
 	
@@ -96,20 +95,6 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${modelmapper.version}</version>
 		</dependency>   	
-    	
-    	
-    	<!-- Aula 13.3 -->
-    	<!-- Atualmente o Squiggly não está funcionando bem quando trabalhamos com o Spring HATEOAS 1.0. Como dito na aula, estes -->
-    	<!-- problemas podem acontecer em projetos pequenos, mas podemos criar issues e acompanhar o projeto do Squiggly no Github,  -->
-    	<!-- para vermos quando e se terá atualização para corrigir este problema.  -->
-    	<!-- Para responses JSON padrões, sem HATEOAS, o filtro funciona corretamente. -->
-    	<!-- Iremos atualizar aqui, caso haja alguma atualização que corrija o problema.  -->
-    	
-		<dependency>
-		    <groupId>com.github.bohnman</groupId>
-		    <artifactId>squiggly-filter-jackson</artifactId>
-		    <version>${squiggly.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
@@ -203,21 +188,16 @@
 		
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
+			<artifactId>springdoc-openapi-starter-common</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-hateoas</artifactId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-security</artifactId>
-			<version>${springdoc.version}</version>
-		</dependency>		
+				
     	
     	<!-- Fim Dependências Spring Doc -->
     	
