@@ -1,0 +1,130 @@
+Listar containers em execução:
+
+- docker container ls
+
+Listar todos os containers:
+
+- docker container ls -all
+
+Parar container:
+
+- docker stop ID_CONTAINER
+
+Iniciar container:
+
+- docker start ID_CONTAINER
+
+Executar o container com a imagem do mysql:
+
+- docker container run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --network algafood-network --name algafood-mysql mysql:8.0
+
+Executar o container com a imagem do algafood-api
+
+ - docker container run --rm -p 8080:8080 -e DB_HOST=algafood-mysql --network algafood-network algafood-api
+
+Comando para construir uma imagem:
+
+ - docker image build -t algafood-api .
+ 
+ Listar as imagens:
+ 
+ - docker image ls
+ 
+ Excluir uma imagem:
+ 
+ - docker rmi ID_IMAGEM
+ 
+ Rodar um container a partir de uma imagem:
+ 
+ - docker container run --rm -p 8080:8080 algafood-api
+ 
+ Listar os containers:
+ 
+ - docker container ls
+ 
+ Criar uma rede (network):
+ 
+ - docker network create --driver bridge algafood-network
+ 
+ Listar as redes:
+ 
+ - docker network ls
+ 
+ Listar os volumes (um locak onde pode armazenar arquivos, tipo um disco):
+ 
+ - docker volume ls
+ 
+ Excluir o container e volumes:
+ 
+ - docker container rm algafood-mysql --force --volumes
+ 
+ Mostrar os logs:
+ 
+ - docker container logs ID_CONTAINER
+ 
+ Limpar as imagens penduradas
+ 
+ - docker image prune
+ 
+ Compilar o projeto e gerar o .jar
+ 
+  - ./mvnw package
+
+ Ativar o profile docker configurado no pom.xml para construir a imagem docker (algafood-api)
+
+ - ./mvnw package -Pdocker   
+
+ Etiquetar a imagem
+
+ - docker image tag algafood-api:latest CONTA_DOCKER_HUB/algafood-api:latest
+ 
+ Logar no docker
+ 
+ - docker login   
+  
+ Publicar no docker register
+
+ - docker push CONTA_DOCKER_HUB/algafood-api:latest
+ 
+ Executar a imagem a partir do docker hub
+
+ - docker container run --rm -p 8080:8080 -e DB_HOST=algafood-mysql --network algafood-network CONTA_DOCKER_HUB/algafood-api
+ 
+   
+ Executar os serviços utilizando docker-compose (Gerenciar múltiplos serviços ao mesmo tempo):
+ 
+  - docker-compose up
+ 
+ Executar os serviços em background utilizando docker-compose:
+ 
+  - docker-compose up -d  
+  
+ Verificar os logs
+
+ - docker-compose logs -f 
+ 
+ Parar os serviços e remover os containers e volumes
+  
+ - docker-compose down --volumes
+ 
+ Escalar duas réplicas da aplicação algafood-api
+ 
+ - docker-compose up --scale algafood-api=2
+ 
+ Executar o container em modo sh que tem a imagem da alpine na rede criada para aplicação da algafood-api (Entendendo o poor mans load balancer dns round robin - Aula 24-16)
+ 
+ - docker container run --rm -it --network algafood-api_algafood-network alpine sh
+
+ Comando que consulta um servidor de DNS por um nome (Ex.: algafood-api):
+ 
+ - nslookup algafood-api
+ 
+ Instalar o curl no alpine:
+ 
+ - apk add curl
+ 
+ Fazer a chamada ao endpoint hostcheck usando o curl
+ 
+ - curl http://algafood-api:8080/hostcheck
+
+  
