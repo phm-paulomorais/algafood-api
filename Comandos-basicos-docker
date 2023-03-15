@@ -25,6 +25,10 @@ Executar o container com a imagem do algafood-api
 Comando para construir uma imagem:
 
  - docker image build -t algafood-api .
+
+ou:
+
+ - docker build --no-cache -t algafood-api .
  
  Listar as imagens:
  
