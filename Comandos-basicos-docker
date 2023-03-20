@@ -134,4 +134,16 @@ ou:
  Iniciar um container mysql
  
  - docker container run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes --name algafood-mysql mysql:8.0 
+ 
+ Executar um container com a imagem Redis em modo cliente:
+ 
+ - docker container run --rm -it redis:6.0.10-alpine redis-cli -h [ENDERECO_REDIS] -p [PORTA] 
+ 
+ Autenticar no Redis:
+ 
+ - auth [SENHA]
+ 
+ Listar as chaves Redis:
+ 
+ - keys *
   
