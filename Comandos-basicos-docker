@@ -131,4 +131,7 @@ ou:
  
  - curl http://algafood-api:8080/hostcheck
 
+ Iniciar um container mysql
+ 
+ - docker container run -d -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes --name algafood-mysql mysql:8.0 
   
